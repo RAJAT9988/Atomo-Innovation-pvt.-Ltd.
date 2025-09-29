@@ -1,0 +1,45 @@
+User-agent: *
+Allow: /
+
+# Block sensitive directories
+Disallow: /admin/
+Disallow: /login/
+Disallow: /config/
+Disallow: /node_modules/
+Disallow: /data/
+Disallow: /private/
+
+# Allow search engines to access important pages
+Allow: /about_page/
+Allow: /airowl_page/
+Allow: /atomicos_page/
+Allow: /carrier_page/
+Allow: /electron_page/
+Allow: /matter_page/
+Allow: /neutron_page/
+Allow: /presskit_page/
+Allow: /proton_page/
+Allow: /smarthome_page/
+
+# Block unnecessary file types
+Disallow: /*.log$
+Disallow: /*.json$
+Disallow: /*.lock$
+
+# Allow asset files
+Allow: /assets/
+Allow: /*.css?v=2.0$
+Allow: /*.js$
+Allow: /*.png?v=1.1$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg?v=2.1$
+Allow: /*.webp$
+Allow: /*.webm$
+
+# Sitemap location
+Sitemap: https://atomo.in/sitemap.xml
+
+# Crawl delay to reduce server load
+Crawl-delay: 1

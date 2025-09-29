@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage - Highest priority -->
+    <url>
+        <loc>https://atomo.in/</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Product Pages -->
+    <url>
+        <loc>https://atomo.in/electron_page/electron.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/proton_page/proton.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/neutron_page/neutron.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/airowl_page/airowl.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Technology Pages -->
+    <url>
+        <loc>https://atomo.in/atomicos_page/atomicos.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/matter_page/matter.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/smarthome_page/smarthome.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Company Pages -->
+    <url>
+        <loc>https://atomo.in/about_page/about.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/carrier_page/carrier.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://atomo.in/presskit_page/press.html</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Blog Section (if you have one) -->
+    <!--
+    <url>
+        <loc>https://atomo.in/blogs/</loc>
+        <lastmod>2024-01-23</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    -->
+</urlset>
