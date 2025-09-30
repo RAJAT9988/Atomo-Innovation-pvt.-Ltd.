@@ -61,9 +61,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Store the server URL for use in detail pages
     localStorage.setItem('blogServerUrl', serverBaseUrl);
 
+    // Sort blogs by date descending (latest first)
+    allBlogs.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
     // ===== 2. FEATURE INSIGHTS (Main Grid) =====
     debugLog('Rendering main blog grid...');
     const insightsContainer = document.querySelector('#second-page .cards');
+    const firstPageCardsContainer = document.querySelector('#first-page-cards');
     const showMoreBtn = document.querySelector('.show-more-btn');
     const searchInput = document.querySelector('.search-input');
     const searchButton = document.querySelector('.search-button');
@@ -96,6 +100,30 @@ document.addEventListener('DOMContentLoaded', async () => {
       const div = document.createElement('div');
       div.innerHTML = html;
       return div.textContent || div.innerText || '';
+    }
+
+    function renderFirstPageCard(blog) {
+      const imageFile = blog.image || 'default-author.jpg';
+      const imagePath = getImagePath(imageFile);
+      const previewText = stripHTML(blog.content || '').substring(0, 200) + '...';
+
+      firstPageCardsContainer.innerHTML = `
+        <div class="card highlight">
+          <div class="highlight-content" style="background-color: #19529a; padding: 1rem; border-radius: 8px;">
+            <h2>${blog.title}</h2>
+            <h3>${blog.subtitle || ''}</h3>
+            <p>${previewText}</p>
+            <a href="./blog-detail.html?id=${blog.id || blog.slug}" class="read-more" style="color: #fff; text-decoration: underline;">Read more →</a>
+          </div>
+          <div class="card-info" style="margin-top: 1rem; color: #ddd;">
+            <div class="author" style="display: flex; align-items: center;">
+              <img src="${imagePath}" alt="${blog.author || 'Author'}" onerror="this.src='./assets/default-author.jpg';" style="width: 50px; height: 50px; border-radius: 50%; margin-right: 0.5rem;">
+              <span>${blog.author || 'Anonymous'}<br>${blog.position || 'Writer'}</span>
+            </div>
+            <p class="date">${blog.date || new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+      `;
     }
 
     function renderInsights(blogs) {
@@ -131,25 +159,58 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initial render
     currentDisplayedBlogs = getFilteredBlogs();
-    renderInsights(currentDisplayedBlogs);
+
+    // Separate latest blog and others
+    let latestBlog = null;
+    let otherBlogs = currentDisplayedBlogs;
+
+    if (currentDisplayedBlogs.length > 0) {
+      // Assuming blogs are sorted by date descending, else sort here
+      otherBlogs = currentDisplayedBlogs.slice(1);
+      latestBlog = currentDisplayedBlogs[0];
+    }
+
+    if (latestBlog) {
+      renderFirstPageCard(latestBlog);
+    } else {
+      firstPageCardsContainer.innerHTML = '<p>No latest blog available.</p>';
+    }
+
+    renderInsights(otherBlogs);
 
     // Show More button
     showMoreBtn.addEventListener('click', () => {
       visibleCount += 3;
-      renderInsights(currentDisplayedBlogs);
+      renderInsights(otherBlogs);
     });
 
     // ===== 3. CATEGORY FILTERS =====
     document.querySelectorAll('.category-buttons button').forEach(button => {
       button.addEventListener('click', () => {
-        document.querySelectorAll('.category-buttons button').forEach(btn => 
+        document.querySelectorAll('.category-buttons button').forEach(btn =>
           btn.classList.remove('active'));
         button.classList.add('active');
-        
+
         currentCategory = button.textContent;
         currentDisplayedBlogs = getFilteredBlogs();
         visibleCount = 6;
-        renderInsights(currentDisplayedBlogs);
+
+        // Separate latest blog and others
+        let latestBlog = null;
+        let otherBlogs = currentDisplayedBlogs;
+
+        if (currentDisplayedBlogs.length > 0) {
+          otherBlogs = currentDisplayedBlogs.slice(1);
+          latestBlog = currentDisplayedBlogs[0];
+        }
+
+        if (latestBlog) {
+          renderFirstPageCard(latestBlog);
+        } else {
+          firstPageCardsContainer.innerHTML = '<p>No latest blog available.</p>';
+        }
+
+        renderInsights(otherBlogs);
       });
     });
 
@@ -158,7 +219,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       searchQuery = searchInput.value.trim().toLowerCase();
       currentDisplayedBlogs = getFilteredBlogs();
       visibleCount = 6;
-      renderInsights(currentDisplayedBlogs);
+
+      // Separate latest blog and others
+      let latestBlog = null;
+      let otherBlogs = currentDisplayedBlogs;
+
+      if (currentDisplayedBlogs.length > 0) {
+        otherBlogs = currentDisplayedBlogs.slice(1);
+        latestBlog = currentDisplayedBlogs[0];
+      }
+
+      if (latestBlog) {
+        renderFirstPageCard(latestBlog);
+      } else {
+        firstPageCardsContainer.innerHTML = '<p>No latest blog available.</p>';
+      }
+
+      renderInsights(otherBlogs);
     }
 
     searchButton.addEventListener('click', performSearch);
